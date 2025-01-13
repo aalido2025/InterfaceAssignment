@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class ClassRelationshipsandInterfaces {
+
+    public static void main(String[] args) {
+        
+    }
+}
+
+class Task implements Priority, Complexity, Comparable<Number> {
+    private int priority;
+    private int complexity;
+    private int comparable;
+    private String taskName;
+    public void setPriority(int input){
+        priority=input;
+    }
+    public int getPriority(int input){
+        return priority;
+    }
+    public void setComplexity(int input){
+        complexity=input;
+    }
+    public int getComplexity(int input){
+        return complexity;
+    }
+}
+
+interface Priority {
+    void setPriority();
+    int getPriority();
+}
+
+interface Complexity {
+    void setComplexity();
+    int getComplexity();
+}
