@@ -1,37 +1,99 @@
-import java.util.*;
-
-public class ClassRelationshipsandInterfaces {
-
+public class InterfaceAssignment {
+// Driver Class with main method
     public static void main(String[] args) {
-        
+        // This creates several tasks
+        Task task1 = new Task("Task 1");
+        task1.setPriority(4);
+        task1.setComplexity(1);
+
+        Task task2 = new Task("Task 2");
+        task2.setPriority(2);
+        task2.setComplexity(2);
+
+        Task task3 = new Task("Task 3");
+        task3.setPriority(1);
+        task3.setComplexity(3);
+
+        Task task4 = new Task("Task 4");
+        task4.setPriority(3);
+        task4.setComplexity(4);
+
+        // This creates an array of tasks
+        Task[] tasks = {task1, task2, task3, task4};
+
+        // This sorts the tasks based on priority, then complexity
+        java.util.Arrays.sort(tasks);
+
+        // This displays sorted tasks
+        System.out.println("Sorted tasks based on priority and complexity:");
+        for (Task task : tasks) {
+            System.out.println(task);
+        }
     }
 }
+    // This is the Interface for priority
+interface Priority {
+    void setPriority(int priority);
+    int getPriority();
+//methods for priority interface
+}
 
-class Task implements Priority, Complexity, Comparable<Number> {
+// This is the complexity Interface
+interface Complexity {
+    void setComplexity(int complexity);
+    int getComplexity();
+//methods for complexity interface
+}
+
+// This is the task class, which implements priority, copmlexity, and the comparable interfaces
+class Task implements Priority, Complexity, Comparable<Task> {
+    private String name;
     private int priority;
     private int complexity;
-    private int comparable;
-    private String taskName;
-    public void setPriority(int input){
-        priority=input;
-    }
-    public int getPriority(int input){
-        return priority;
-    }
-    public void setComplexity(int input){
-        complexity=input;
-    }
-    public int getComplexity(int input){
-        return complexity;
-    }
-}
 
-interface Priority {
-    void setPriority();
-    int getPriority();
-}
+    // Constructor
+    public Task(String name) {
+        this.name = name;
+        this.priority = 0;  // default priority
+        this.complexity = 0;  // default complexity
+    }
 
-interface Complexity {
-    void setComplexity();
-    int getComplexity();
+    // Implementing setPriority and getPriority from Priority interface
+    @Override
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    @Override
+    public int getPriority() {
+        return this.priority;
+    }
+
+    // implements setComplexity and getComplexity from the complexity interface
+    @Override
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
+    }
+
+    @Override
+    public int getComplexity() {
+        return this.complexity;
+    }
+
+    // implements compareTo from Comparable interface, first by priority, then by complexity
+    @Override
+    public int compareTo(Task otherTask) {
+        // First compare by priority
+        if (this.priority != otherTask.priority) {
+            return Integer.compare(this.priority, otherTask.priority);
+        }
+        // If priorities are the same, compare by complexity
+        return Integer.compare(this.complexity, otherTask.complexity);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{name='" + name + "', priority=" + priority + ", complexity=" + complexity + "}";
+//returns result to main
+    }
 }
